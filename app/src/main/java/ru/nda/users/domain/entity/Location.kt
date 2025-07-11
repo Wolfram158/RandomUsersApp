@@ -1,5 +1,9 @@
 package ru.nda.users.domain.entity
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Location(
     val street: Street,
     val city: String,
@@ -8,4 +12,4 @@ data class Location(
     val postcode: String,
     val coordinates: Coordinates,
     val timezone: Timezone
-)
+): Parcelable

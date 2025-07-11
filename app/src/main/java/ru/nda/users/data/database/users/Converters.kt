@@ -55,7 +55,6 @@ class Converters @Inject constructor(
         return gson.toJson(loginDbo)
     }
 
-
     @TypeConverter
     fun getDobDbo(str: String): DobDbo {
         return gson.fromJson(
@@ -69,7 +68,6 @@ class Converters @Inject constructor(
         return gson.toJson(dobDbo)
     }
 
-
     @TypeConverter
     fun getRegisteredDbo(str: String): RegisteredDbo {
         return gson.fromJson(
@@ -82,7 +80,6 @@ class Converters @Inject constructor(
     fun saveRegisteredDbo(registeredDbo: RegisteredDbo): String {
         return gson.toJson(registeredDbo)
     }
-
 
     @TypeConverter
     fun getPictureDbo(str: String): PictureDbo {

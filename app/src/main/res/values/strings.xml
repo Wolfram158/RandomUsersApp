@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">RandomUsersApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="users">users</string>
     <string name="photo">photo</string>
+    <string name="user_information">user information</string>
+    <string name="common_information"><b>Common information</b></string>
+    <string name="registered"><b>Registered</b></string>
+    <string name="login"><b>Login</b></string>
+    <string name="location"><b>Location</b></string>
 </resources>

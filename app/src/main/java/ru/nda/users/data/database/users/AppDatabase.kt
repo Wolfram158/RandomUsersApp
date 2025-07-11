@@ -36,5 +36,5 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun getWeatherDao(): UsersDao
+    abstract fun getUsersDao(): UsersDao
 }

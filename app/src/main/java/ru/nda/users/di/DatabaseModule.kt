@@ -11,10 +11,7 @@ class DatabaseModule {
     @AppScope
     @Provides
     fun provideUsersDao(context: Context): UsersDao {
-        return AppDatabase.getInstance(context).getWeatherDao()
+        return AppDatabase.getInstance(context).getUsersDao()
     }
 
-    companion object {
-        private const val DB_NAME = "users.db"
-    }
 }

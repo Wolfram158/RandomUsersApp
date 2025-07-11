@@ -14,7 +14,8 @@ import ru.nda.users.domain.entity.User
 
 class UserViewHolder @AssistedInject constructor(
     private val imageLoader: ImageLoader,
-    @Assisted private val binding: ItemUserBinding
+    @Assisted private val binding: ItemUserBinding,
+    @Assisted private val callback: (Any) -> Unit
 ) : PagingViewHolder(binding.root) {
     override fun <T : Item> bind(item: T) {
         (item as? User) ?: throw RuntimeException("User class is expected")
@@ -45,11 +46,14 @@ class UserViewHolder @AssistedInject constructor(
                 append(", ")
                 append(item.location.postcode)
             }
+            root.setOnClickListener {
+                callback(item)
+            }
         }
     }
 
     @AssistedFactory
     interface UserViewHolderFactory {
-        fun create(binding: ItemUserBinding): UserViewHolder
+        fun create(binding: ItemUserBinding, callback: (Any) -> Unit): UserViewHolder
     }
 }

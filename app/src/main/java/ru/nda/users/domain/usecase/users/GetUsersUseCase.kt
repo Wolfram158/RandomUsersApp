@@ -1,8 +1,10 @@
 package ru.nda.users.domain.usecase.users
 
+import ru.nda.users.di.AppScope
 import ru.nda.users.domain.repository.users.UsersRepository
 import javax.inject.Inject
 
+@AppScope
 class GetUsersUseCase @Inject constructor(
     private val repository: UsersRepository
 ) {

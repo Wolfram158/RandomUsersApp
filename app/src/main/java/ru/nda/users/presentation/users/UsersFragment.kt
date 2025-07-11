@@ -11,11 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import kotlinx.coroutines.launch
 import ru.nda.paging.presentation.adapter.PagingAdapter
+import ru.nda.users.R
 import ru.nda.users.databinding.FragmentUsersBinding
 import ru.nda.users.databinding.ItemUserBinding
 import ru.nda.users.domain.entity.User
 import ru.nda.users.domain.state.State
 import ru.nda.users.presentation.App
+import ru.nda.users.presentation.user.UserFragment
 import ru.nda.users.presentation.users.adapter.UserViewHolder
 import ru.nda.users.presentation.vmfactory.ViewModelFactory
 import javax.inject.Inject
@@ -38,7 +40,9 @@ class UsersFragment : Fragment() {
                             parent,
                             false
                         )
-                    )
+                    ) { maybeUser ->
+                        launchUserFragment(maybeUser)
+                    }
                 }
             ),
             {},
@@ -87,12 +91,31 @@ class UsersFragment : Fragment() {
         }
     }
 
+    private fun launchUserFragment(maybeUser: Any) {
+        if (maybeUser !is User) {
+            throw RuntimeException("Unexpected error")
+        }
+        parentFragmentManager.beginTransaction()
+            .replace(
+                R.id.container,
+                UserFragment.newInstance(maybeUser),
+                null
+            )
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun setupUsersRv() {
         binding.usersRv.adapter = adapter
         binding.usersRv
             .addItemDecoration(
                 DividerItemDecoration(context, LinearLayout.VERTICAL)
             )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
