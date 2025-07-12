@@ -1,9 +1,13 @@
 package ru.nda.users.domain.repository.users
 
-import kotlinx.coroutines.flow.Flow
-import ru.nda.users.domain.entity.User
-import ru.nda.users.domain.state.State
+import ru.nda.users.domain.entity.user.User
 
 interface UsersRepository {
-    fun getUsers(page: Int, counts: Int, seed: String): Flow<State<List<User>>>
+    suspend fun getUsersFromNet(page: Int, counts: Int, seed: String): List<User>
+
+    suspend fun insertUsers(users: List<User>)
+
+    suspend fun getUsersFromDb(): List<User>
+
+    suspend fun deleteAll()
 }

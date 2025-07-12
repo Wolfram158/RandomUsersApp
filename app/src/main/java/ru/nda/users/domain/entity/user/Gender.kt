@@ -1,4 +1,4 @@
-package ru.nda.users.domain.entity
+package ru.nda.users.domain.entity.user
 
 enum class Gender {
     MALE, FEMALE, UNDEFINED;

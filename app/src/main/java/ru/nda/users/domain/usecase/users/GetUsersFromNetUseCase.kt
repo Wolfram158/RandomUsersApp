@@ -5,11 +5,11 @@ import ru.nda.users.domain.repository.users.UsersRepository
 import javax.inject.Inject
 
 @AppScope
-class GetUsersUseCase @Inject constructor(
+class GetUsersFromNetUseCase @Inject constructor(
     private val repository: UsersRepository
 ) {
-    operator fun invoke(page: Int, counts: Int = 10, seed: String = "seed") =
-        repository.getUsers(
+    suspend operator fun invoke(page: Int, counts: Int = 10, seed: String = "seed") =
+        repository.getUsersFromNet(
             page = page,
             counts = counts,
             seed = seed

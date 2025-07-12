@@ -1,4 +1,4 @@
-package ru.nda.users.domain.entity
+package ru.nda.users.domain.entity.user
 
 import android.os.Parcelable
 import ru.nda.paging.domain.Item

@@ -1,11 +1,22 @@
 package ru.nda.users.data.database.users.dbo
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "users")
+@Entity(
+    tableName = "users",
+    primaryKeys = [
+        "genderDbo",
+        "nameDbo",
+        "locationDbo",
+        "email",
+        "loginDbo",
+        "dobDbo",
+        "registeredDbo",
+        "pictureDbo",
+        "phone"
+    ]
+)
 data class UserDbo(
-    @PrimaryKey(autoGenerate = true) val id: Int,
     val genderDbo: GenderDbo,
     val nameDbo: NameDbo,
     val locationDbo: LocationDbo,

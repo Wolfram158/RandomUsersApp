@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.google.gson.Gson
 import ru.nda.users.data.database.users.dbo.UserDbo
 
 @TypeConverters(Converters::class)
@@ -16,7 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
         private val LOCK = Any()
         private const val DB_NAME = "users.db"
 
-        fun getInstance(context: Context): AppDatabase {
+        fun getInstance(context: Context, gson: Gson): AppDatabase {
             instance?.let {
                 return it
             }
@@ -28,7 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     DB_NAME
-                ).build().run {
+                ).addTypeConverter(Converters(gson)).build().run {
                     instance = this
                     this
                 }

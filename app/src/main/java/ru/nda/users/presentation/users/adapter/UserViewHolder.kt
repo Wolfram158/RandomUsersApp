@@ -1,6 +1,5 @@
 package ru.nda.users.presentation.users.adapter
 
-import android.R.drawable.stat_notify_error
 import coil.ImageLoader
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -9,8 +8,9 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.nda.paging.domain.Item
 import ru.nda.paging.presentation.adapter.PagingViewHolder
+import ru.nda.users.R
 import ru.nda.users.databinding.ItemUserBinding
-import ru.nda.users.domain.entity.User
+import ru.nda.users.domain.entity.user.User
 
 class UserViewHolder @AssistedInject constructor(
     private val imageLoader: ImageLoader,
@@ -20,8 +20,8 @@ class UserViewHolder @AssistedInject constructor(
     override fun <T : Item> bind(item: T) {
         (item as? User) ?: throw RuntimeException("User class is expected")
         with(binding) {
-            photoIv.load(item.picture.medium, imageLoader) {
-                error(stat_notify_error)
+            photoIv.load(item.picture.large, imageLoader) {
+                error(R.drawable.undefined)
                 transformations(CircleCropTransformation())
             }
             fioTv.text = buildString {

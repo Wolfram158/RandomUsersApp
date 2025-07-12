@@ -5,9 +5,8 @@ import ru.nda.users.domain.repository.user.UserRepository
 import javax.inject.Inject
 
 @AppScope
-class ShowMapUseCase @Inject constructor(
+class MailtoUseCase @Inject constructor(
     private val repository: UserRepository
 ) {
-    operator fun invoke(latitude: String, longitude: String) =
-        repository.showMap(latitude = latitude, longitude = longitude)
+    operator fun invoke(email: String) = repository.mailto(email)
 }

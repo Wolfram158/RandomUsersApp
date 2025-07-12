@@ -19,12 +19,18 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        launchUsersFragment()
+        if (supportFragmentManager.findFragmentByTag(UsersFragment.USERS_FRAGMENT) == null) {
+            launchUsersFragment()
+        }
     }
 
     private fun launchUsersFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, UsersFragment.newInstance(), null)
+            .add(
+                R.id.container,
+                UsersFragment.newInstance(),
+                UsersFragment.USERS_FRAGMENT
+            )
             .commit()
     }
 }

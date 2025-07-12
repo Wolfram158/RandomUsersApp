@@ -10,17 +10,17 @@ import ru.nda.users.data.network.dto.RegisteredDto
 import ru.nda.users.data.network.dto.StreetDto
 import ru.nda.users.data.network.dto.TimezoneDto
 import ru.nda.users.data.network.dto.UserDto
-import ru.nda.users.domain.entity.Coordinates
-import ru.nda.users.domain.entity.Dob
-import ru.nda.users.domain.entity.Gender
-import ru.nda.users.domain.entity.Location
-import ru.nda.users.domain.entity.Login
-import ru.nda.users.domain.entity.Name
-import ru.nda.users.domain.entity.Picture
-import ru.nda.users.domain.entity.Registered
-import ru.nda.users.domain.entity.Street
-import ru.nda.users.domain.entity.Timezone
-import ru.nda.users.domain.entity.User
+import ru.nda.users.domain.entity.user.Coordinates
+import ru.nda.users.domain.entity.user.Dob
+import ru.nda.users.domain.entity.user.Gender
+import ru.nda.users.domain.entity.user.Location
+import ru.nda.users.domain.entity.user.Login
+import ru.nda.users.domain.entity.user.Name
+import ru.nda.users.domain.entity.user.Picture
+import ru.nda.users.domain.entity.user.Registered
+import ru.nda.users.domain.entity.user.Street
+import ru.nda.users.domain.entity.user.Timezone
+import ru.nda.users.domain.entity.user.User
 
 fun UserDto.toUser() = User(
     gender = when (gender) {

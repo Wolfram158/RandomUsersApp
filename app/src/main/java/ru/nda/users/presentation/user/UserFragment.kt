@@ -1,14 +1,11 @@
 package ru.nda.users.presentation.user
 
-import android.R.drawable.stat_notify_error
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.util.Linkify
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +15,13 @@ import androidx.lifecycle.ViewModelProvider
 import coil.ImageLoader
 import coil.load
 import coil.transform.CircleCropTransformation
+import ru.nda.users.R
 import ru.nda.users.databinding.FragmentUserBinding
-import ru.nda.users.domain.entity.User
+import ru.nda.users.domain.entity.user.User
 import ru.nda.users.presentation.App
 import ru.nda.users.presentation.vmfactory.ViewModelFactory
 import ru.nda.users.utils.appendLine
-import java.util.regex.Matcher
 import javax.inject.Inject
-
 
 class UserFragment : Fragment() {
     private var _binding: FragmentUserBinding? = null
@@ -81,19 +77,17 @@ class UserFragment : Fragment() {
     private fun setupUserInformation() {
         with(binding) {
             photoIv.load(user.picture.large, imageLoader) {
-                error(stat_notify_error)
+                error(R.drawable.undefined)
                 transformations(CircleCropTransformation())
             }
             commonInformationTv.text = buildSpannedString {
                 appendLine("Name", listOf(user.name.firstName, user.name.lastName))
                 val phone = SpannableString(user.phone)
-                Linkify.addLinks(
-                    phone,
-                    Patterns.PHONE,
-                    "tel:",
-                    Linkify.sPhoneNumberMatchFilter,
-                    Linkify.sPhoneNumberTransformFilter
-                )
+                phone.setSpan(object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        userViewModel.makePhoneNumber(user.phone)
+                    }
+                }, 0, phone.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                 append("Phone: ")
                 append(phone)
                 append(System.lineSeparator())
@@ -101,20 +95,11 @@ class UserFragment : Fragment() {
                 appendLine("Date of birth", listOf(user.dob.date))
                 appendLine("Age", listOf(user.dob.age))
                 val email = SpannableString(user.email)
-                Linkify.addLinks(
-                    email,
-                    Patterns.EMAIL_ADDRESS,
-                    "mailto:",
-                    null,
-                    object : Linkify.TransformFilter {
-                        override fun transformUrl(
-                            match: Matcher?,
-                            url: String?
-                        ): String? {
-                            return url
-                        }
+                email.setSpan(object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        userViewModel.mailto(user.email)
                     }
-                )
+                }, 0, email.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                 append("Email: ")
                 append(email)
                 append(System.lineSeparator())
@@ -167,7 +152,7 @@ class UserFragment : Fragment() {
     }
 
     companion object {
-        //        private const val ITEM_CLASS_NAME = "ru.nda.users.domain.entity.User"
+        //        private const val ITEM_CLASS_NAME = "ru.nda.users.domain.entity.user.User"
         private const val USER = "user"
 
         fun newInstance(user: User) =

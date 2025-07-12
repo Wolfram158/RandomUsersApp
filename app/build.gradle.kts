@@ -44,6 +44,8 @@ dependencies {
 
     implementation(project(":paging"))
 
+    implementation(libs.androidx.swiperefreshlayout)
+
     implementation(libs.coil)
 
     implementation(libs.okHttp)
@@ -53,6 +55,7 @@ dependencies {
     implementation(libs.dagger.support)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.swiperefreshlayout)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.processor)
 
