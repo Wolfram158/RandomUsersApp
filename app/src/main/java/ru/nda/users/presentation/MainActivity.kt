@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     private fun launchUsersFragment() {
         supportFragmentManager.beginTransaction()
             .add(R.id.container, UsersFragment.newInstance(), null)
-            .addToBackStack(null)
             .commit()
     }
 }
