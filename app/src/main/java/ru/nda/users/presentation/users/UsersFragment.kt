@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import ru.nda.paging.domain.Item
 import ru.nda.paging.presentation.adapter.PagingAdapter
@@ -116,9 +117,9 @@ class UsersFragment : Fragment() {
     }
 
     private fun observeUsersState() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                usersViewModel.state.collect { state ->
+                usersViewModel.state.collectLatest { state ->
                     if (state !is FirstProgress) {
                         binding.progressBar.visibility = View.GONE
                     }
