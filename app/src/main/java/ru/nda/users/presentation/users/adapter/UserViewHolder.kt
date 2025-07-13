@@ -24,28 +24,20 @@ class UserViewHolder @AssistedInject constructor(
                 error(R.drawable.undefined)
                 transformations(CircleCropTransformation())
             }
-            fioTv.text = buildString {
-                append("Name: ")
-                append(item.name.firstName)
-                append(" ")
-                append(item.name.lastName)
-            }
-            phoneTv.text = buildString {
-                append("Phone: ")
-                append(item.phone)
-            }
-            addressTv.text = buildString {
-                append("Address: ")
-                append(item.location.country)
-                append(", ")
-                append(item.location.city)
-                append(", ")
-                append(item.location.street.name)
-                append(" ")
-                append(item.location.street.number)
-                append(", ")
-                append(item.location.postcode)
-            }
+            fioTv.text = String.format(
+                "Name: %s %s",
+                item.name.firstName,
+                item.name.lastName
+            )
+            phoneTv.text = String.format("Phone: %s", item.phone)
+            addressTv.text = String.format(
+                "Address: %s, %s, %s, %s, %s",
+                item.location.country,
+                item.location.city,
+                item.location.street.name,
+                item.location.street.number,
+                item.location.postcode
+            )
             root.setOnClickListener {
                 callback(item)
             }

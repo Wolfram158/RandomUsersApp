@@ -96,6 +96,8 @@ class UsersFragment : Fragment() {
 
         if (savedInstanceState == null) {
             usersViewModel.loadUsersPage(usersAdapter)
+        } else {
+            usersAdapter.submitList(usersViewModel.data)
         }
     }
 
@@ -161,8 +163,8 @@ class UsersFragment : Fragment() {
                         val visibleItemCount = it.childCount
                         val totalItemCount = it.itemCount
                         val firstVisibleItemPosition =
-                            (layoutManager as LinearLayoutManager)
-                                .findFirstVisibleItemPosition()
+                            (layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition()
+                                ?: throw RuntimeException("LinearLayoutManager is expected")
                         if (usersViewModel.state.value !is FirstProgress &&
                             usersViewModel.state.value !is Progress &&
                             usersViewModel.state.value !is Error &&
