@@ -3,7 +3,7 @@ package ru.nda.users.presentation.users
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.nda.paging.domain.Error
 import ru.nda.paging.domain.Item
@@ -30,8 +30,7 @@ class UsersViewModel @Inject constructor(
     private val deleteAllUseCase: DeleteAllUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<State>(Initial)
-    val state: StateFlow<State>
-        get() = _state
+    val state = _state.asStateFlow()
 
     private val _data = mutableListOf<Item>()
     val data: List<Item>
